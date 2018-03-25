@@ -5,6 +5,8 @@
 from PyQt5.QtWidgets import (QWidget, QToolTip,
                              QPushButton, QMessageBox)
 from PyQt5.QtWidgets import QDesktopWidget
+from PyQt5.QtWidgets import QLabel, QLineEdit, QTextEdit
+from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout, QGridLayout
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import QCoreApplication
 
@@ -59,3 +61,133 @@ class Windows_Example(QWidget):
             event.accept()
         else:
             event.ignore()
+
+
+class Windows_AbsoltueWindow(QWidget):
+
+    def __init__(self):
+        super().__init__()
+
+        self.initUI()
+
+    def initUI(self):
+
+        lbl1 = QLabel('Label1', self)
+        lbl1.move(15, 10)
+
+        lbl2 = QLabel('Label2', self)
+        lbl2.move(35, 40)
+
+        lbl3 = QLabel('Label3', self)
+        lbl3.move(55, 70)
+
+        lbl4 = QLabel('Label3', self)
+        lbl4.move(75, 100)
+
+        self.setGeometry(300, 300, 250, 150)
+        self.setWindowTitle('Absolute')
+        self.show()
+
+
+class Windows_BoxlayoutWindow(QWidget):
+
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+
+        button1_1 = QPushButton("button1_1")
+        button1_1.clicked.connect(self.btn_clicked)
+        button1_2 = QPushButton("button1_2")
+        button1_2.clicked.connect(self.btn_clicked)
+        button2_1 = QPushButton("button2_1")
+        button2_1.clicked.connect(self.btn_clicked)
+        button2_2 = QPushButton("button2_2")
+        button2_2.clicked.connect(self.btn_clicked)
+
+        hbox1 = QHBoxLayout()
+        hbox1.addStretch(1)
+        hbox1.addWidget(button1_1)
+        hbox1.addWidget(button1_2)
+
+        hbox2 = QHBoxLayout()
+        hbox2.addStretch(1)
+        hbox2.addWidget(button2_1)
+        hbox2.addWidget(button2_2)
+
+        vbox = QVBoxLayout()
+        vbox.addStretch(1)
+        vbox.addLayout(hbox1)
+        vbox.addLayout(hbox2)
+
+        self.setLayout(vbox)
+        self.setGeometry(300, 300, 300, 150)
+        self.setWindowTitle('Buttons')
+        self.show()
+
+    def btn_clicked(self, event):
+        QMessageBox.information(self, 'Btn_clicked', 'You Click Buttom')
+
+
+class Windows_GridLayoutWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        grid = QGridLayout()
+        self.setLayout(grid)
+
+        names = ['Cls', 'Bck', '', 'Close',
+                 '7', '8', '9', '/',
+                 '4', '5', '6', '*',
+                 '1', '2', '3', '-',
+                 '0', '.', '=', '+']
+
+        positions = [(i, j) for i in range(5) for j in range(4)]
+
+        for position, name in zip(positions, names):
+
+            if name == '':
+                continue
+            button = QPushButton(name)
+            grid.addWidget(button, *position)
+
+        self.move(300, 150)
+        self.setWindowTitle('Calculator')
+        self.show()
+
+
+class Windows_GridLayout1Window(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+
+        title = QLabel('Title')
+        author = QLabel('Author')
+        review = QLabel('Review')
+
+        titleEdit = QLineEdit()
+        authorEdit = QLineEdit()
+        reviewEdit = QTextEdit()
+
+        grid = QGridLayout()
+        grid.setSpacing(10)
+
+        grid.addWidget(title, 1, 0)
+        grid.addWidget(titleEdit, 1, 1)
+
+        grid.addWidget(author, 2, 0)
+        grid.addWidget(authorEdit, 2, 1)
+
+        grid.addWidget(review, 3, 0)
+        grid.addWidget(reviewEdit, 3, 1, 5, 1)
+
+        self.setLayout(grid)
+
+        self.setGeometry(300, 300, 350, 300)
+        self.setWindowTitle('Review')
+        self.show()
