@@ -5,7 +5,7 @@ from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QDialog
 
 
-class My_Dialog(QDialog):
+class MyDialog(QDialog):
     'this a my dialog with two button'
 
     def __init__(self):

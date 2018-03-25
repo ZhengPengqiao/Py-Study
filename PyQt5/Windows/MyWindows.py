@@ -11,7 +11,7 @@ from PyQt5.QtGui import QFont
 from PyQt5.QtCore import QCoreApplication
 
 
-class Windows_Example(QWidget):
+class WindowsExample(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -63,7 +63,7 @@ class Windows_Example(QWidget):
             event.ignore()
 
 
-class Windows_AbsoltueWindow(QWidget):
+class WindowsAbsoltueWindow(QWidget):
 
     def __init__(self):
         super().__init__()
@@ -89,7 +89,7 @@ class Windows_AbsoltueWindow(QWidget):
         self.show()
 
 
-class Windows_BoxlayoutWindow(QWidget):
+class WindowsBoxlayoutWindow(QWidget):
 
     def __init__(self):
         super().__init__()
@@ -130,7 +130,7 @@ class Windows_BoxlayoutWindow(QWidget):
         QMessageBox.information(self, 'Btn_clicked', 'You Click Buttom')
 
 
-class Windows_GridLayoutWindow(QWidget):
+class WindowsGridLayoutWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -159,7 +159,7 @@ class Windows_GridLayoutWindow(QWidget):
         self.show()
 
 
-class Windows_GridLayout1Window(QWidget):
+class WindowsGridLayout1Window(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()

@@ -4,10 +4,10 @@
 '''
 PushButton
 '''
-__author__ = 'Tony Zhu'
+import sys
+
 # 这里我们提供必要的引用, 基本控件位于PyQt5.QtWidgets模块中
 from PyQt5.QtWidgets import QApplication, QPushButton
-import sys
 
 # 每一pyqt5应用程序必须创建一个应用程序对象。sys.argv参数是一个列表，从命令行输入参数。
 if __name__ == '__main__':

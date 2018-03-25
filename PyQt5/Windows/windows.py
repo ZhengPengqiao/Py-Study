@@ -6,5 +6,5 @@ import MyWindows
 from PyQt5.QtWidgets import QApplication
 
 app = QApplication(sys.argv)
-my1 = MyWindows.Windows_GridLayout1Window()
+my1 = MyWindows.WindowsGridLayout1Window()
 sys.exit(app.exec_())
