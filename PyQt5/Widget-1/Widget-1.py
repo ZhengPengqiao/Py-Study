@@ -6,5 +6,5 @@ import MyUI
 from PyQt5.QtWidgets import QApplication
 
 app = QApplication(sys.argv)
-my = MyUI.UI_Widget()
+my = MyUI.My_Widget()
 sys.exit(app.exec_())

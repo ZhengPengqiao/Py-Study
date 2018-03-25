@@ -2,24 +2,32 @@
 # -*- coding: utf-8 -*-
 
 from PyQt5 import QtCore, QtWidgets
+from PyQt5.QtWidgets import QDialog
 
 
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(640, 480)
-        self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
-        self.buttonBox.setGeometry(QtCore.QRect(10, 440, 621, 32))
-        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(
+class My_Dialog(QDialog):
+    'this a my dialog with two button'
+
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        self.setObjectName("Dialog")
+        self.resize(640, 480)
+        buttonBox = QtWidgets.QDialogButtonBox(self)
+        buttonBox.setOrientation(QtCore.Qt.Horizontal)
+        buttonBox.setStandardButtons(
             QtWidgets.QDialogButtonBox.Cancel | QtWidgets.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName("buttonBox")
+        buttonBox.setObjectName("buttonBox")
+        buttonBox.accepted.connect(self.accept)
+        buttonBox.rejected.connect(self.reject)
 
-        self.retranslateUi(Dialog)
-        self.buttonBox.accepted.connect(Dialog.accept)
-        self.buttonBox.rejected.connect(Dialog.reject)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
-
-    def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        self.setWindowTitle(_translate("Dialog", "Dialog"))
+        QtCore.QMetaObject.connectSlotsByName(self)
+
+        self.setGeometry(400, 400, 600, 400)
+        self.move(100, 100)
+        self.setWindowTitle('Ui_Dialog')
+        self.show()

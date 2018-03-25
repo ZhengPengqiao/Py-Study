@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QWidget
 from PyQt5.QtGui import QIcon
 
 
-class UI_Widget(QWidget):
+class My_Widget(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()

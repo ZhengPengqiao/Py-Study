@@ -1,11 +1,10 @@
 #!/usr/bin/python3
-# -*- coding: UTF-8 -*-
+# -*- coding:utf-8 -*-
 
-import MyUI
 import sys
+import MyWindows
 from PyQt5.QtWidgets import QApplication
 
 app = QApplication(sys.argv)
-my = MyUI.My_Dialog()
-
-exit(app.exec_())
+my = MyWindows.Windows_Example()
+sys.exit(app.exec_())
