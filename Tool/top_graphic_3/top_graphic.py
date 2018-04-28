@@ -112,6 +112,7 @@ class MyTestMplCanvas(MyMplCanvas):
 
 		for x in np.arange(len(arrY)):
 			print(name[x], "arrY[",x,"]=",len(arrY[x]), arrY[x])
+
 		# 绘制图形
 		for x in np.arange(len(name)):
 			if ( x == 0):
@@ -119,8 +120,18 @@ class MyTestMplCanvas(MyMplCanvas):
 			else:
 				self.axes.hold(True)
 			self.axes.plot(np.arange(0., len(arrY[x]), 1), arrY[x], c=color[x], label=name[x],)
-
 		self.axes.legend(loc='center left')
+
+		# 打印表的名字和横纵轴的文字
+		self.axes.set_title("this cpu used", fontsize=24, color='#FF0000')
+		self.axes.set_xlabel("Time", fontsize=16)
+		self.axes.set_ylabel("CPU Used", fontsize=16)
+		self.axes.grid(True, color='g',linestyle='--',linewidth='1')
+		self.axes.set_ylim(0, 100)
+
+		# 标记一条刻度线
+		# plt.axhline(y=18, xmin=0, xmax=100, c='#FFFF00')
+		self.axes.set_yticks(np.arange(0, 101, 2))
 
 
 class ApplicationWindow(QMainWindow):
