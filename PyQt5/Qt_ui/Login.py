@@ -12,9 +12,11 @@ class Login(QMainWindow):
     def __init__(self, *args):
         super(Login, self).__init__(*args)
         loadUi('Login.ui', self)   #看到没，瞪大眼睛看
-        self.button_show.clicked.connect(self.button_show_text)
-        self.button_reset.clicked.connect(self.button_clear_text)
-        self.button_quit.clicked.connect(QCoreApplication.instance().quit)
+        
+        # 可以在ui文件中设置,也可以在这里使用代码进行链接
+        # self.button_show.clicked.connect(self.button_show_text)
+        # self.button_reset.clicked.connect(self.button_clear_text)
+        # self.button_quit.clicked.connect(QCoreApplication.instance().quit)
 
     def button_show_text(self, event):
         QMessageBox.information(self, 'Show Message', self.lineEdit_name.text() + " " + self.lineEdit_age.text())

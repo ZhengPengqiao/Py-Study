@@ -121,7 +121,7 @@
    </property>
    <widget class="QMenu" name="menuFIle">
     <property name="title">
-     <string>&amp;FIle'</string>
+     <string>&amp;FIle</string>
     </property>
    </widget>
    <addaction name="menuFIle"/>
@@ -129,5 +129,58 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>button_show</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>button_show_text()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>92</x>
+     <y>154</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>23</x>
+     <y>153</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_reset</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>button_clear_text()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>164</x>
+     <y>151</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>112</x>
+     <y>168</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_quit</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>273</x>
+     <y>154</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>333</x>
+     <y>143</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>button_show_text()</slot>
+  <slot>button_clear_text()</slot>
+ </slots>
 </ui>
