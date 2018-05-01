@@ -16,10 +16,10 @@ class main_window(QMainWindow):
 	def __init__(self, *args):
 		super(main_window, self).__init__(*args)
 		loadUi('main_window.ui', self)   #看到没，瞪大眼睛看		
-
 		self.test_mpl_canvas = MyMplCanvas.MyTestMplCanvas(self.centralwidget, width=5, height=4, dpi=100)
 		if ( len(sys.argv) >= 2 ):
 			self.test_mpl_canvas.file_name = sys.argv[1]
+		self.action_Open.triggered.connect(self.show_getOpenFileName_dialog)  
 		self.matplot_layout.addWidget(self.test_mpl_canvas)
 		self.update_draw(self)
 
@@ -82,12 +82,14 @@ class main_window(QMainWindow):
 
 
 	def add_item_button_onClick(self, event):
+		if self.lineEdit_itemString.text() == "":
+			QMessageBox.information(self, "提示", "右侧编辑框为空,应先填写再添加")
+			return
 		self.listWidget_selects.addItem(self.lineEdit_itemString.text())
 		self.lineEdit_itemString.setText("")
 
 
-	def open_file_button_onClick(self, event):
-		pass
-		file_path, ok1 = QFileDialog.getOpenFileName(self,"open file dialog","./","ALL Files(*.*)")
-		self.test_mpl_canvas.file_name = file_path
-		print(self.test_mpl_canvas.file_name)
+	def show_getOpenFileName_dialog(self):  
+		file_name,  _ = QFileDialog.getOpenFileName(self, 'Open file', './')  
+		self.test_mpl_canvas.file_name = file_name
+		self.statusBar.showMessage("open file:"+self.test_mpl_canvas.file_name)

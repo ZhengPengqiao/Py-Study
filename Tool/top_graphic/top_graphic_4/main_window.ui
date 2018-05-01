@@ -22,7 +22,7 @@
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,10">
     <item>
-     <layout class="QVBoxLayout" name="ctrl_layout" stretch="0,0,0">
+     <layout class="QVBoxLayout" name="ctrl_layout" stretch="0,0,0,0">
       <property name="spacing">
        <number>1</number>
       </property>
@@ -30,16 +30,9 @@
        <enum>QLayout::SetMinAndMaxSize</enum>
       </property>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
-         <widget class="QPushButton" name="open_file_button">
-          <property name="text">
-           <string>打开文件</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="redraw_button">
           <property name="text">
            <string>刷新绘制</string>
           </property>
@@ -48,11 +41,28 @@
        </layout>
       </item>
       <item>
+       <widget class="Line" name="line_2">
+        <property name="lineWidth">
+         <number>3</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QPushButton" name="add_item_button">
           <property name="text">
            <string>添加选项:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
@@ -185,6 +195,24 @@
     </item>
    </layout>
   </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>601</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_File">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="action_Open"/>
+   </widget>
+   <addaction name="menu_File"/>
+  </widget>
   <action name="action_Open">
    <property name="text">
     <string>&amp;Open</string>
@@ -200,8 +228,8 @@
    <slot>add_button_onClick()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>109</x>
-     <y>201</y>
+     <x>169</x>
+     <y>206</y>
     </hint>
     <hint type="destinationlabel">
      <x>104</x>
@@ -216,8 +244,8 @@
    <slot>del_button_onClick()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>109</x>
-     <y>229</y>
+     <x>169</x>
+     <y>234</y>
     </hint>
     <hint type="destinationlabel">
      <x>100</x>
@@ -232,8 +260,8 @@
    <slot>listWidget_selects_itemDoubleClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>49</x>
-     <y>99</y>
+     <x>61</x>
+     <y>236</y>
     </hint>
     <hint type="destinationlabel">
      <x>120</x>
@@ -258,14 +286,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_2</sender>
+   <sender>redraw_button</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>update_draw()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>248</x>
-     <y>17</y>
+     <y>28</y>
     </hint>
     <hint type="destinationlabel">
      <x>110</x>
@@ -296,8 +324,8 @@
    <slot>add_all_button_onClick()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>144</x>
-     <y>170</y>
+     <x>169</x>
+     <y>178</y>
     </hint>
     <hint type="destinationlabel">
      <x>159</x>
@@ -312,28 +340,12 @@
    <slot>add_item_button_onClick()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>57</x>
-     <y>41</y>
+     <x>68</x>
+     <y>69</y>
     </hint>
     <hint type="destinationlabel">
      <x>277</x>
      <y>30</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>open_file_button</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>open_file_button_onClick()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>82</x>
-     <y>18</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>312</x>
-     <y>8</y>
     </hint>
    </hints>
   </connection>
