@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding:utf-8 -*-
 
-from PyQt5.QtWidgets import QApplication, QAction, QFileDialog,  QTextEdit  
+from PyQt5.QtWidgets import QApplication, QAction, QFileDialog,  QTextEdit  , QPushButton
 from PyQt5 import QtWidgets  
 from PyQt5.QtCore import Qt  
 from PyQt5.QtGui import QIcon  
@@ -16,7 +16,8 @@ class OpenFile(QtWidgets.QMainWindow):
 		self.setCentralWidget(self.textEdit)  
 
 		self.statusBar()  
-		self.setFocus()  
+		self.setFocus()
+
 
 		exit = QAction(QIcon('icons/Blue_Flower.ico'), 'Open', self)  
 		exit.setShortcut('Ctrl+O')  
@@ -26,14 +27,26 @@ class OpenFile(QtWidgets.QMainWindow):
 
 		menubar = self.menuBar()  
 		file = menubar.addMenu('&File')  
-		file.addAction(exit)  
+		file.addAction(exit)
+
+		self.open_button = QPushButton("Open", self)
+		self.open_button.move(0, 0)
+		self.open_button.clicked.connect(self.open_button_onClocked)
+
+	def open_button_onClocked(self, event):
+		filename,  _ = QFileDialog.getOpenFileName(self, 'Open file', './')  
+		if filename:  
+			file = open(filename)  
+			data = file.read()   
+			self.textEdit.setText(data)  
+  
 
 	def showDialog(self):  
-			filename,  _ = QFileDialog.getOpenFileName(self, 'Open file', './')  
-			if filename:  
-				file = open(filename)  
-				data = file.read()   
-				self.textEdit.setText(data)  
+		filename,  _ = QFileDialog.getOpenFileName(self, 'Open file', './')  
+		if filename:  
+			file = open(filename)  
+			data = file.read()   
+			self.textEdit.setText(data)  
   
 if __name__ == "__main__":  
 	import sys  
