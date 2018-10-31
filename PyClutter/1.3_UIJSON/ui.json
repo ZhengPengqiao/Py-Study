@@ -1,0 +1,38 @@
+[
+  {
+    "id" : "stage",
+    "type" : "ClutterStage",
+    "width" : 400,
+    "height" : 400,
+    "color" : "#333355ff",
+    "title" : "Scripting example",
+    "children" : [ "box" ],
+    "signals" : [
+      { "name" : "destroy", "handler" : "clutter_main_quit" }
+    ]
+  },
+
+  {
+    "id" : "box",
+    "type" : "ClutterBox",
+    "width" : 400,
+    "height" : 400,
+
+    "layout-manager" : {
+      "type" : "ClutterBinLayout",
+      "x-align" : "center",
+      "y-align" : "center"
+    },
+
+    "children" : [
+      {
+        "id" : "rectangle",
+        "type" : "ClutterRectangle",
+        "width" : 200,
+        "height" : 200,
+        "color" : "red"
+      }
+    ]
+  }
+
+]
