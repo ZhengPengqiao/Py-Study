@@ -22,7 +22,7 @@ class MyMplCanvas(FigureCanvasQTAgg):
 		fig = Figure(figsize=(width, height), dpi=dpi)
 		self.axes = fig.add_subplot(111)
 		# 每次plot()调用的时候，我们希望原来的坐标轴被清除(所以False)
-		self.axes.hold(False)
+		# self.axes.hold(False)
 
 		self.compute_initial_figure()
 
