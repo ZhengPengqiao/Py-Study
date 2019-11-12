@@ -22,14 +22,15 @@ class main_window(QMainWindow):
 			self.test_mpl_canvas.file_name = sys.argv[1]
 		self.action_Open.triggered.connect(self.show_getOpenFileName_dialog)
 		self.actionSave_windows.triggered.connect(self.save_windows)
-		self.action_Show_Ctrl_layout.triggered.connect(self.show_ctrl_layout)
-		self.action_Hide_Ctrl_layout.triggered.connect(self.hide_ctrl_layout)
+		self.action_show_step_sub5.triggered.connect(self.show_step_sub5)
+		self.action_show_step_add5.triggered.connect(self.show_step_add5)
 
 		self.matplot_layout.addWidget(self.test_mpl_canvas)
 		self.update_draw(self)
 
 	# 按钮">"的点击时间,将选项添加到选中listWidget中
 	def add_button_onClick(self, event):
+		self.test_mpl_canvas.is_usrselectname=1
 		# 将选中的选项添加到显示选项,并从可选选项中移除
 		item = self.listWidget_selects.currentItem()
 		if( item == None):
@@ -41,6 +42,7 @@ class main_window(QMainWindow):
 
 	# 按钮"<"的点击时间,将选中的选项移动到待选listWidget中
 	def del_button_onClick(self, event):
+		self.test_mpl_canvas.is_usrselectname=1
 		# 将选中的选项添加到可选选项,并从显示选项,中移除
 		item = self.listWidget_selected.currentItem()
 		if( item == None):
@@ -52,6 +54,7 @@ class main_window(QMainWindow):
 
 	# 按钮">>"的点击时间,将选项添加到选中listWidget中
 	def add_all_button_onClick(self, event):
+		self.test_mpl_canvas.is_usrselectname=1
 		# 将选中的选项添加到显示选项,并从可选选项中移除
 		for x in range( self.listWidget_selects.count()):
 			item = self.listWidget_selects.takeItem(0)
@@ -60,17 +63,21 @@ class main_window(QMainWindow):
 
 	# 按钮"<<"的点击时间,将选中的选项移动到待选listWidget中
 	def del_all_button_onClick(self, event):
+		self.test_mpl_canvas.is_usrselectname=1
 		# 将选中的选项添加到可选选项,并从显示选项,中移除
 		for x in range( self.listWidget_selected.count()):
 			item = self.listWidget_selected.takeItem(0)
 			self.listWidget_selects.addItem(item.text())
 
+
 	def listWidget_selected_itemDoubleClicked(self, item):
+		self.test_mpl_canvas.is_usrselectname=1
 		self.listWidget_selects.addItem(item.text())
 		self.listWidget_selected.removeItemWidget(item)
 		self.listWidget_selected.takeItem(self.listWidget_selected.row(item))
 
 	def listWidget_selects_itemDoubleClicked(self, item):
+		self.test_mpl_canvas.is_usrselectname=1
 		self.listWidget_selected.addItem(item.text())
 		self.listWidget_selects.takeItem(self.listWidget_selects.row(item))
 
@@ -101,12 +108,27 @@ class main_window(QMainWindow):
 		file_name,  _ = QFileDialog.getOpenFileName(self, 'Open file', './')  
 		self.test_mpl_canvas.file_name = file_name
 		self.statusBar.showMessage("open file:"+self.test_mpl_canvas.file_name)
+		self.test_mpl_canvas.is_usrselectname=0
+		self.test_mpl_canvas.color.clear()
+		self.test_mpl_canvas.name.clear()
+		self.listWidget_selects.clear()
+		self.listWidget_selected.clear()
+		self.test_mpl_canvas.update_figure()
+		for x in range( len(self.test_mpl_canvas.name) ):
+			print(self.test_mpl_canvas.name[x])
+			self.listWidget_selected.addItem(self.test_mpl_canvas.name[x])
+		self.test_mpl_canvas.is_usrselectname=1
 
-	def hide_ctrl_layout(self):
-		pass
 
-	def show_ctrl_layout(self):
-		pass
+	def show_step_add5(self):
+		self.test_mpl_canvas.step+=5
+		self.update_draw(self)
+
+	def show_step_sub5(self):
+		self.test_mpl_canvas.step-=5
+		if( self.test_mpl_canvas.step < 1 ):
+			self.test_mpl_canvas.step=1
+		self.update_draw(self)
 
 	def save_windows(self):
 		screen = QGuiApplication.primaryScreen();

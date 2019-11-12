@@ -37,7 +37,9 @@ class MyTestMplCanvas(MyMplCanvas):
 		self.name = []
 		self.limit_yl = 0
 		self.limit_yh = 100
+		self.step = 5
 		self.loc_str = 'top right'
+		self.is_usrselectname = 0
 		
 		MyMplCanvas.__init__(self, *args, **kwargs)
 
@@ -50,54 +52,46 @@ class MyTestMplCanvas(MyMplCanvas):
 
 	def update_canvas(self):
 
-		if len(self.name) == 0:
-			print("name count is 0, will return")
+		print(self.file_name)
+		if ( len(self.file_name) == 0 ):
+			print("self.file_name is empty")
 			return
 
-		arr_count=[] * len(self.name)
-		arrY= [[] for i in np.arange(len(self.name))]
-
-		# 记录cpu,和进程名的位置
-		cpu_index = -1
-		name_index = -1
-
+		index=0
+		arrY= [[] for i in np.arange(20)]
 		# 读取文件中的数据
 		with open(self.file_name, 'r') as f:
 			linea = f.readlines()
 
 			for x in np.arange(len(linea)):
-				# 解析用户占用和系统占用的资源
-				if (("User" in linea[x]) and ("System"  in linea[x])):
-					item = linea[x].split()
-					use_val = sys_val = 0
-					for i in np.arange(len(item)):
-						if ("User" in item[i]):
-							use_val = float(item[i+1].replace("%,",""))
-						elif ("System" in item[i]):
-							sys_val = float(item[i+1].replace("%,",""))
-							arrY[0].append(use_val+sys_val)
-				# 查看显示信息时,cpu和进程名的位置
-				elif (("CPU%" in linea[x]) and ("Name"  in linea[x])):
-					item = linea[x].split()
-					for i in np.arange(len(item)):
-						if ("CPU%" in item[i]):
-							cpu_index = i
-						elif ("Name" in item[i]):
-							name_index = i
-				# 按照各个程序名,记录cpu的占用
-				elif ("User " not in linea[x]):
-					item = linea[x].split()
-					if ( (len(item) >= name_index) and (name_index != -1) and (cpu_index != -1) and (len(item) >= cpu_index) ):
-						for x in np.arange(len(self.name)):
-							if (self.name[x] == item[-1]):
-								arrY[x].append(float(item[cpu_index].replace("%","")))
+				if( self.is_usrselectname != 1 ):
+					print("deal all line:")
+					# 解析用户占用和系统占用的资源
+					item = linea[x].split(",") 	#每一行中的每个信息，第一个是名字，后面是数据值
+					self.name.append(item[0])
+					colorrgb = [float(random.randint(0, 255))/float(255) for x in np.arange(3)]
+					self.color.append(colorrgb)
+					for i in np.arange(len(item)-1):
+						tmp_val = float(item[i+1].replace("%",""))
+						arrY[x].append(tmp_val)
+					index=index+1
+					
+				else:
+					# 解析用户占用和系统占用的资源
+					item = linea[x].split(",") 	#每一行中的每个信息，第一个是名字，后面是数据值
+					if ( item[0] in self.name ):
+						print("deal select item:" + item[0])
+						for i in np.arange(len(item)-1):
+							tmp_val = float(item[i+1].replace("%",""))
+							arrY[index].append(tmp_val)
+						index=index+1
+					else:
+						print("ignore no select item:" + item[0])
 
-
-		for x in np.arange(len(arrY)):
+		for x in np.arange(len(self.name)):
 			print(self.name[x], "arrY[",x,"]=",len(arrY[x]), arrY[x])
 
 		print("limit y l->h loc_pos", self.limit_yl, self.limit_yh, self.loc_str);
-
 
 		# 绘制图形
 		for x in np.arange(len(self.name)):
@@ -112,11 +106,11 @@ class MyTestMplCanvas(MyMplCanvas):
 
 		# 打印表的名字和横纵轴的文字
 		self.axes.set_xlabel("Time", fontsize=16)
-		self.axes.set_ylabel("CPU Used", fontsize=16)
+		self.axes.set_ylabel("Val", fontsize=16)
 		self.axes.grid(True, color='g',linestyle='--',linewidth='1')
 		self.axes.set_ylim(self.limit_yl, self.limit_yh)
 
 		# 标记一条刻度线
 		# plt.axhline(y=18, xmin=0, xmax=100, c='#FFFF00')
-		self.axes.set_yticks(np.arange(self.limit_yl, self.limit_yh, 2))
+		self.axes.set_yticks(np.arange(self.limit_yl, self.limit_yh, self.step))
 

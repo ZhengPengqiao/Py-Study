@@ -300,8 +300,8 @@
     <property name="title">
      <string>&amp;Ctrl</string>
     </property>
-    <addaction name="action_Show_Ctrl_layout"/>
-    <addaction name="action_Hide_Ctrl_layout"/>
+    <addaction name="action_show_step_sub5"/>
+    <addaction name="action_show_step_add5"/>
    </widget>
    <addaction name="menu_File"/>
    <addaction name="menu_Ctrl"/>
@@ -311,14 +311,14 @@
     <string>&amp;Open</string>
    </property>
   </action>
-  <action name="action_Show_Ctrl_layout">
+  <action name="action_show_step_sub5">
    <property name="text">
-    <string>&amp;Show_Ctrl_layout</string>
+    <string>&amp;show_step_sub5</string>
    </property>
   </action>
-  <action name="action_Hide_Ctrl_layout">
+  <action name="action_show_step_add5">
    <property name="text">
-    <string>&amp;Hide_Ctrl_layout</string>
+    <string>&amp;show_step_add5</string>
    </property>
   </action>
   <action name="actionSave_windows">
