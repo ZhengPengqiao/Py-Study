@@ -14,7 +14,7 @@ print("file_name:"+file_name)
 
 index=0
 name = []
-arrY= [[] for i in np.arange(20)]
+arrY= [[] for i in np.arange(40)]
 
 name.append("Overall Bus Load")
 name.append("Read:")
