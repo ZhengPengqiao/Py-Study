@@ -1,11 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# 应该使用python2.7
-
 import cv2 as cv
 
 fname = '../assert/lena.jpg'
+
+print(cv.__version__)
 
 im = cv.imread(fname)
 cv.imshow('image', im)
