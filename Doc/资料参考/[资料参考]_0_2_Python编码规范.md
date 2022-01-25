@@ -1,7 +1,6 @@
-# pyqt
+# [资料参考]_0_2_Python编码规范
 
-* sudo apt install python-pip
-* pip install --upgrade pip
+> 创建时间:20220126 00:32:00
 
 ## 编码规范
 
